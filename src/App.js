@@ -1,24 +1,32 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from 'react';
+import axios from './axios-orders';
+import Orders from './components/orders/orders';
 
 function App() {
+  const [orders, setOrders] = useState([]);
+  useEffect(() => {
+    axios
+      .get('orders.json')
+      .then(res => {
+        const orderData = res.data;
+        const ordersList = [];
+        for (const key in orderData) {
+          ordersList.push({
+            id: key,
+            type: orderData[key].type,
+            number: orderData[key].number,
+            price: orderData[key].price
+          });
+        }
+        setOrders(ordersList);
+      })
+      .catch(err => console.log(err));
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1>Hello world</h1>
+      <Orders orders={orders} />
     </div>
   );
 }
