@@ -1,14 +1,25 @@
-import React from 'react';
-import Order from './order/order';
+import React, { Fragment } from "react";
+import Order from "./order/order";
+import AddOrder from "./addOrder/addOrder";
 
-const orders = props => {
-  console.log(props.orders);
+const orders = ({ orders }) => {
   return (
-    <div>
-      {props.orders.map(order => {
-        return <Order key={order.id} order={order} />;
-      })}
-    </div>
+    <Fragment>
+      <AddOrder />
+      <hr />
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fit, minmax(14rem,1fr))",
+          justifyContent: "center",
+          alignItems: "center"
+        }}
+      >
+        {orders.map(order => {
+          return <Order key={order.id} order={order} />;
+        })}
+      </div>
+    </Fragment>
   );
 };
 
