@@ -64,9 +64,6 @@ const AddOrders = () => {
         />
         <button style={styleBtn}>Add order</button>
       </form>
-      <p>
-        {typeOrder} {priceOrder} {numberOrder}
-      </p>
     </>
   );
 };
