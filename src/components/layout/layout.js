@@ -1,5 +1,5 @@
 import React from "react";
-
+import Nav from "../nav/nav";
 const layout = ({ children }) => {
   return (
     <div
@@ -9,7 +9,8 @@ const layout = ({ children }) => {
         height: "100vh"
       }}
     >
-      <main>{children}</main>
+      <Nav />
+      <main style={{ marginTop: "4rem" }}>{children}</main>
     </div>
   );
 };

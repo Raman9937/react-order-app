@@ -1,38 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
 import axios from "./axios-orders";
+
 import Layout from "./components/layout/layout";
 import Orders from "./components/orders/orders";
 import ShowOrder from "./components/orders/order/showOrder";
-
+import AddOrder from "./components/orders/addOrder/addOrder";
 function App() {
   const [orders, setOrders] = useState([]);
-  // const fakeOrders = [
-  //   {
-  //     id: 1,
-  //     type: "Pizza",
-  //     number: 1,
-  //     price: 1.75
-  //   },
-  //   {
-  //     id: 2,
-  //     type: "Hamburger",
-  //     number: 1,
-  //     price: 1.5
-  //   },
-  //   {
-  //     id: 3,
-  //     type: "Salad",
-  //     number: 1,
-  //     price: 0.99
-  //   },
-  //   {
-  //     id: 4,
-  //     type: "Bread",
-  //     number: 1,
-  //     price: 1.2
-  //   }
-  // ];
   useEffect(() => {
     axios
       .get("orders.json")
@@ -47,8 +22,8 @@ function App() {
             price: orderData[key].price
           });
         }
-    setOrders(ordersList);
-    // setOrders(fakeOrders);
+        setOrders(ordersList);
+        // setOrders(fakeOrders);
       })
       .catch(err => console.log(err));
   }, []);
@@ -59,6 +34,7 @@ function App() {
         <Switch>
           <Route path="/" exact render={props => <Orders orders={orders} />} />
           <Route exact path="/order/:id" component={ShowOrder} />
+          <Route exact path="/add-order" component={AddOrder} />
         </Switch>
       </Layout>
     </Router>
