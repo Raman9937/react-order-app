@@ -3,11 +3,12 @@ import axios from "../../../axios-orders";
 
 const ShowOrder = props => {
   useEffect(() => {
-    axios
-      .get("/orders.json/" + props.match.params.id)
-      .then(res => console.log(res))
-      .catch(err => console.log(err));
-    console.log(props.match.params.id);
+    if (props.match.params.id) {
+      axios
+        .get("/orders.json/" + props.match.params.id)
+        .then(res => console.log(res))
+        .catch(err => console.log(err));
+    }
   }, []);
   return <div>this page will show soon</div>;
 };
